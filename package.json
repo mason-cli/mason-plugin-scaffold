@@ -1,0 +1,15 @@
+{
+  "name": "mason-scaffold",
+  "version": "1.0.0",
+  "description": "Scaffolding plugin for the Mason command line toolkit",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "build": "babel src -d lib"
+  },
+  "author": "",
+  "license": "ISC"
+}
