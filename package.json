@@ -4,7 +4,7 @@
   "description": "Scaffolding plugin for the Mason command line toolkit",
   "main": "index.js",
   "dependencies": {
-    "mason": "git+https://github.com/aewing/mason.git"
+    "mason.cli": "0.0.2"
   },
   "devDependencies": {},
   "scripts": {
