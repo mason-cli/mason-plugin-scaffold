@@ -1,6 +1,6 @@
 {
-  "name": "mason-scaffold",
-  "version": "1.0.0",
+  "name": "mason.plugin.scaffold",
+  "version": "0.0.1",
   "description": "Scaffolding plugin for the Mason command line toolkit",
   "main": "index.js",
   "dependencies": {
@@ -11,6 +11,6 @@
     "start": "babel-node src/index.js",
     "build": "babel src -d lib"
   },
-  "author": "",
+  "author": "Andrew Ewing",
   "license": "ISC"
 }
