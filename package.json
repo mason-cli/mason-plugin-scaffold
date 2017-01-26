@@ -1,6 +1,6 @@
 {
   "name": "mason.plugin.scaffold",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Scaffolding plugin for Mason CLI",
   "author": "Andrew Ewing <drew@phenocode.com> (https://github.com/aewing)",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "bin"
   ],
   "dependencies": {
-    "mason.cli": "0.0.8"
+    "mason.cli": "0.1.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.22.0",
