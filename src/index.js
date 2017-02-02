@@ -44,21 +44,25 @@ class MasonScaffoldCommand extends Command {
 		let buffer = fs.readFileSync(filename) + '';
 
 		let interactive = (this.input.flags.indexOf('interactive') !== -1 || this.input.flags.indexOf('i') !== -1) ? true : false;
-		let replacements;
+		let defaultValues = (conf.definitions ? conf.definitions : {});
+		let replacements = new Map(Object.entries(defaultValues));
 		if(interactive) {
 			let prefix_match = (var_prefix + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 			let suffix_match = (var_suffix + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 			let match_txt = new RegExp(prefix_match + '([^ ]+)' + suffix_match, 'g');
 			let parts = buffer.match(match_txt);
-			replacements = new Map();
 			let self = this;
 			console.log('When prompted, please provide a replacement for the following variables:');
 			parts.forEach((part) => {
 				let variable = (part+'').replace(var_prefix, '').replace(var_suffix, '');
-				replacements.set(variable, self.runner.prompt(' > ' + variable + ': '));
+				let defaultValue = replacements.has(variable) ? replacements.get(variable) : '';
+				let value = self.runner.prompt(' > ' + variable + '    (default: "' + defaultValue + '"):' + "\t");
+				replacements.set(variable, value ? value : defaultValue);
 			});
 		} else {
-			replacements = new Map(Object.entries(this.input.options));
+			this.input.options.forEach((word,replacement) => {
+				replacements.set(word, replacement);
+			})
 		}
 		replacements.forEach((replacement, original) => {
 			console.info(' - Replacing ' + var_prefix + original + var_suffix + ' with ' + replacement);

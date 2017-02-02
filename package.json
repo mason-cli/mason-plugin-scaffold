@@ -1,6 +1,6 @@
 {
   "name": "mason.plugin.scaffold",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Scaffolding plugin for Mason CLI",
   "author": "Andrew Ewing <drew@phenocode.com> (https://github.com/aewing)",
   "license": "MIT",

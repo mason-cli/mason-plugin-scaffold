@@ -3,6 +3,9 @@ module.exports = {
 	scaffold: {
 		templates: {
 			'example': './example/in.txt'
+		},
+		definitions: {
+			foo: 'ConfigForFoo'
 		}
 	}
 };

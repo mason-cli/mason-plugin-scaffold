@@ -14,10 +14,16 @@ module.exports = {
 			'controller': './templates/controller.js',
 			'model': './templates/model.js',
 			'admin-panel': './templates/admin-panel.html'
+		},
+		definitions: {
+			foo: 'ConfigForFoo'
 		}
 	}
 };
 ```
+### Definitions
+As you can see in the configuration example above, you can also define "Definitions" that serve as default template bindings.
+Any variable defined in the config will use the config value if none is provided for the template.
 
 ## Usage
 Scaffold is used as follows:

@@ -1,3 +1,6 @@
+# 0.1.3
+Added the option to load defaults from config file
+
 # 0.1.1 - 0.1.2
 Added interactive & force flags
 Improved console output
