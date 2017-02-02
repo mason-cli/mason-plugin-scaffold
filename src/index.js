@@ -38,11 +38,28 @@ class MasonScaffoldCommand extends Command {
 		}
 
 		let conf = ScaffoldUtil.getConf(this);
-		let replacements = new Map(Object.entries(this.input.options));
 		let var_prefix = conf.hasOwnProperty('var_prefix') ? conf.var_prefix : '@@{';
 		let var_suffix = conf.hasOwnProperty('var_suffix') ? conf.var_suffix : '}@@';
 
 		let buffer = fs.readFileSync(filename) + '';
+
+		let interactive = (this.input.flags.indexOf('interactive') !== -1 || this.input.flags.indexOf('i') !== -1) ? true : false;
+		let replacements;
+		if(interactive) {
+			let prefix_match = (var_prefix + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+			let suffix_match = (var_suffix + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+			let match_txt = new RegExp(prefix_match + '([^ ]+)' + suffix_match, 'g');
+			let parts = buffer.match(match_txt);
+			replacements = new Map();
+			let self = this;
+			console.log('When prompted, please provide a replacement for the following variables:');
+			parts.forEach((part) => {
+				let variable = (part+'').replace(var_prefix, '').replace(var_suffix, '');
+				replacements.set(variable, self.runner.prompt(' > ' + variable + ': '));
+			});
+		} else {
+			replacements = new Map(Object.entries(this.input.options));
+		}
 		replacements.forEach((replacement, original) => {
 			console.info(' - Replacing ' + var_prefix + original + var_suffix + ' with ' + replacement);
 			buffer = buffer.replace(var_prefix + original + var_suffix, replacement);
@@ -70,11 +87,12 @@ class MasonScaffoldCommand extends Command {
 
 			let templates = this.runner.data.get('scaffold.templates');
 			if(templates.has(template)) {
+				let flags = (this.input.flags.indexOf('f') !== -1 || this.input.flags.indexOf('force') !== -1) ? 'w+' : 'wx';
 				// Attempt to open a write stream to the destination
-				fs.open(destination, 'wx', (err, fd) => {
+				fs.open(destination, flags, (err, fd) => {
 					if(err) {
 						if(err.code == "EEXIST") {
-							console.error("The file '" + destination + "' already exists.");
+							console.error("The file '" + destination + "' already exists. Run with the --force flag to overwrite the file.");
 						} else {
 							throw err;
 						}
