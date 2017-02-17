@@ -2,10 +2,11 @@ module.exports = {
 	plugins: ['./lib/index.js'],
 	scaffold: {
 		templates: {
-			'example': './example/in.txt'
+			'example': {source:'./example/in.txt',destination:'./example/out'}
 		},
 		definitions: {
 			foo: 'ConfigForFoo'
-		}
+		},
+		destination_path: 'example'
 	}
 };
