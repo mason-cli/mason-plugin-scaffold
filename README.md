@@ -44,3 +44,6 @@ Mason.emit('addScaffoldTemplate', { name: 'my-template-name', location: __dirnam
 ## Building Mason Scaffold
 To build this plugin, run the following from the project directory:
 `npm run build`
+
+## Contributions
+Thanks to @jaimemasson for the idea and the name.
