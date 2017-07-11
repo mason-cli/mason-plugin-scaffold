@@ -1,23 +1,15 @@
 {
   "name": "mason.plugin.scaffold",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "Scaffolding plugin for Mason CLI",
   "author": "Andrew Ewing <drew@phenocode.com> (https://github.com/aewing)",
   "license": "MIT",
   "repository": "aewing/mason-scaffold",
   "main": "lib/index.js",
-  "tags": [
-    "mason",
-    "command",
-    "scaffold",
-    "template",
-    "plugin"
-  ],
-  "files": [
-    "lib",
-    "bin"
-  ],
+  "tags": ["mason", "command", "scaffold", "template", "plugin"],
+  "files": ["lib", "bin"],
   "dependencies": {
+    "lodash": "^4.17.4",
     "mason.cli": "0.1.54"
   },
   "devDependencies": {
@@ -26,6 +18,7 @@
   },
   "scripts": {
     "start": "babel-node src/index.js",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "watch": "babel --watch src -d lib"
   }
 }
